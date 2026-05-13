@@ -1,0 +1,174 @@
+import java.util.Scanner;
+public class Menu {
+    public static void main(String[] args) {
+
+        try (Scanner sc = new Scanner(System.in)) {
+
+            Estudantes[] estudantes = new Estudantes[100];
+            Disciplina[] disciplinas = new Disciplina[50];
+
+            int qtdEstudantes = 0;
+            int qtdDisciplinas = 0;
+            int opcao = 0;
+
+        while (opcao != 5) {
+
+            System.out.println("\n1 - Cadastrar Disciplina");
+            System.out.println("2 - Cadastrar Estudante");
+            System.out.println("3 - Inserir estudante na disciplina");
+            System.out.println("4 - Listar");
+            System.out.println("5 - Editar estudante");
+            System.out.println("6 - Editar disciplina");
+            System.out.println("7 - Sair");
+
+            opcao = sc.nextInt();
+            sc.nextLine();
+
+        if (opcao == 1) {
+
+                System.out.println("ID da disciplina: ");
+                int idDisciplina = sc.nextInt();
+
+                System.out.print("Nome da disciplina: ");
+                String nome = sc.nextLine();
+
+                System.out.print("Nome do professor: ");
+                String professor = sc.nextLine();
+
+                System.out.print("Carga horária: ");
+                int carga = sc.nextInt();
+                sc.nextLine();
+
+                disciplinas[qtdDisciplinas] = new Disciplina(idDisciplina, nome, professor, carga);
+                qtdDisciplinas++;
+            }
+
+        if (opcao == 2) {
+
+                System.out.println("ID do estudante: ");
+                int idAluno = sc.nextInt();
+
+                System.out.print("Nome do estudante: ");
+                String nome = sc.nextLine();
+
+                System.out.print("Idade: ");
+                int idade = sc.nextInt();
+                sc.nextLine();
+
+                System.out.print("Endereço: ");
+                String endereco = sc.nextLine();
+
+                System.out.print("Telefone: ");
+                String telefone = sc.nextLine();
+
+                System.out.print("Curso: ");
+                String curso = sc.nextLine();
+
+                estudantes[qtdEstudantes] = new Estudantes(idAluno, nome, idade, endereco, telefone, curso);
+                qtdEstudantes++;
+            }
+
+        if (opcao == 3) {
+
+                System.out.println("Escolha o estudante:");
+                for (int i = 0; i < qtdEstudantes; i++) {
+                    System.out.println(i + " - " + estudantes[i].getNomeAluno());
+                }
+                int e = sc.nextInt();
+
+                System.out.println("Escolha a disciplina:");
+                for (int i = 0; i < qtdDisciplinas; i++) {
+                    System.out.println(i + " - " + disciplinas[i].getNomeDisciplina());
+                }
+                int d = sc.nextInt();
+
+                disciplinas[d].inserirEstudante(estudantes[e]);
+            }
+
+        if (opcao == 4) {
+    
+        System.out.println("\n===== DISCIPLINAS =====");
+        for (int i = 0; i < qtdDisciplinas; i++) {
+            System.out.println("Disciplina: " + disciplinas[i].getNomeDisciplina());
+            System.out.println("Professor: " + disciplinas[i].getNomeDoProfessor());
+            disciplinas[i].listarEstudantes();  //chama o método de listar
+    }
+    
+        System.out.println("===== ESTUDANTES =====");
+        for (int i = 0; i < qtdEstudantes; i++) {
+            System.out.println(i + "-" + estudantes[i].toString());
+        // se quiser mostrar todos os dados, aí usa o exibirDados()
+    }
+
+}
+        if (opcao == 5) {
+    
+        // 1. Mostrar os estudantes disponíveis
+        System.out.println("Digite o ID do estudante que quer editar:");
+            for (int i = 0; i < qtdEstudantes; i++) {
+            System.out.println(i + " - " + estudantes[i].getIdAluno());
+    }
+    
+    // 2. Pegar qual estudante o usuário quer editar
+        int i = sc.nextInt();
+        sc.nextLine();
+    
+    // 3. Pedir os novos dados
+        System.out.print("Novo nome: ");
+        String novoNome = sc.nextLine();
+    
+        System.out.print("Nova idade: ");
+        int novaIdade = sc.nextInt();
+        sc.nextLine();
+    
+        System.out.print("Novo endereço: ");
+        String novoEndereco = sc.nextLine();
+    
+        System.out.print("Novo telefone: ");
+        String novoTelefone = sc.nextLine();
+    
+        System.out.print("Novo curso: ");
+        String novoCurso = sc.nextLine();
+    
+    // 4. Chamar o método de editar
+    estudantes[i].editarAluno(novoNome, novaIdade, novoEndereco, novoTelefone, novoCurso);
+}
+        if (opcao == 6) {
+    
+    // 1. Mostrar as disciplinas disponíveis
+        System.out.println("Escolha a disciplina para editar:");
+            for (int i = 0; i < qtdDisciplinas; i++) {
+            System.out.println(i + " - " + disciplinas[i].getIdDisciplina());
+    }
+    
+    // 2. Pegar qual disciplina o usuário quer editar
+        int i = sc.nextInt();
+        sc.nextLine();
+    
+    // 3. Pedir os novos dados
+        System.out.print("Novo nome da disciplina: ");
+        String novoNome = sc.nextLine();
+    
+        System.out.print("Novo nome do professor: ");
+        String novoProfessor = sc.nextLine();
+    
+        System.out.print("Nova carga horária: ");
+        int novaCarga = sc.nextInt();
+        sc.nextLine();
+    
+    // 4. Chamar o método de editar
+    disciplinas[i].editarDisciplina(novoNome, novoProfessor, opcao);
+}
+
+        if (opcao == 7) {
+                System.out.println("Programa encerrado.");
+            }
+
+        else {
+                System.out.println("Opção inválida.");
+            }
+        }
+
+    }
+}
+}
