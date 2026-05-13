@@ -1,0 +1,74 @@
+public class Disciplina {
+
+    private int idDisciplina;
+    private String nomeDisciplina;
+    private String NomeDoProfessor;
+    private int cargaHoraria;
+    private Estudantes[] estudantes;
+    private Disciplina[] disciplinas;
+    private int qtdEstudantes;
+    private int qtdDisciplinas;
+
+    public Disciplina(int idDisciplina, String nomeDisciplina, String NomeDoProfessor, int cargaHoraria) {
+        this.idDisciplina = idDisciplina;
+        this.nomeDisciplina = nomeDisciplina;
+        this.NomeDoProfessor = NomeDoProfessor;
+        this.cargaHoraria = cargaHoraria;
+        this.estudantes = new Estudantes[100];
+        this.qtdEstudantes = 0;
+    }
+
+    public int getIdDisciplina() {
+        return idDisciplina;
+    }
+    
+    public String getNomeDisciplina() {
+        return nomeDisciplina;
+    }
+
+    public String getNomeDoProfessor() {
+        return NomeDoProfessor;
+    }
+
+    public int getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public int getQtdEstudantes() {
+        return qtdEstudantes;
+    }
+
+    public int getQtdDisciplinas() {
+        return qtdDisciplinas;
+    }
+
+    public void inserirEstudante(Estudantes estudante) {
+        if (qtdEstudantes < estudantes.length) {
+            estudantes[qtdEstudantes] = estudante;
+            qtdEstudantes++;
+        } else {
+            System.out.println("Limite de estudantes atingido.");
+        }
+    }
+
+    public void listarEstudantes() {
+        System.out.println("Estudantes matriculados na disciplina " + nomeDisciplina + ":");
+        for (int i = 0; i < qtdEstudantes; i++) {
+            System.out.println("- " + estudantes[i].getNomeAluno());
+        }
+    }
+
+    public void listarDisciplinas(){
+        System.out.println("Disciplinas cadastradas " + nomeDisciplina + ":");
+        for (int i = 0; i < qtdDisciplinas; i++) {
+            System.out.println("-" + disciplinas[i].getNomeDisciplina());
+        }
+    }
+
+    public void editarDisciplina(String nomeDisciplina, String NomeDoProfessor, int cargaHoraria) {
+        this.nomeDisciplina = nomeDisciplina;
+        this.NomeDoProfessor = NomeDoProfessor;
+        this.cargaHoraria = cargaHoraria;
+        System.out.println("Disciplina atualizada com sucesso!");
+    }
+}
